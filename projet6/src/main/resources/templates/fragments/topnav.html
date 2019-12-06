@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Home</title>
+
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.2.1/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/accueil.css}" />
+
+</head>
+
+<body>
+<div th:fragment="navbar" xmlns:sec="http://www.w3.org/1999/xhtml">
+    <nav class="navbar navbar-expand-lg navbar-light bg-info" style="background-color: #e3f2fd;">
+        <a class="navbar-brand" href="#">Les amis de l'escalade</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+            </ul>
+            <!--        <form class="form-inline my-2 my-lg-0">
+                        &lt;!&ndash;            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">&ndash;&gt;
+                        <a href="#" class="btn btn-primary stretched-link mr-3">Connexion</a>
+                        <a href="#" class="btn btn-success stretched-link">Inscription</a>
+                    </form>-->
+            <div sec:authorize="isAuthenticated()">
+                <b><span style="color: white;" th:text="${ utilisateur.prenom + ' ' + utilisateur.nom }"></span></b>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Mes topos</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Créer un topo</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Partager un site</a>
+                    </div>
+                </div>
+                <form method="post" action="#" th:action="@{/logout}" class="d-inline-block">
+                    <button class="btn btn-primary ml-3" type="submit">Déconnexion</button>
+                </form>
+                <!-- Test Dropdown -->
+<!--                <div class="dropdown d-inline-block">
+                    <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </div>-->
+                <!---->
+            </div>
+
+            <div class="form-inline my-2 my-lg-0" sec:authorize="!isAuthenticated()">
+                <!--            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">-->
+                <a th:href="@{/login}" class="btn btn-primary stretched-link mr-3">Connexion</a>
+                <a th:href="@{/inscription}" class="btn btn-success stretched-link">Inscription</a>
+            </div>
+
+        </div>
+    </nav>
+</div>
+<!--<script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>-->
+<script type="text/javascript" th:src="@{/webjars/bootstrap/4.2.1/js/bootstrap.min.js}"></script>
+</body>
+</html>

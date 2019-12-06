@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="5af7163a-0185-4f8e-98ba-af13159f1e1d" name="Default Changelist" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="CSS File" />
+        <option value="HTML File" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="MavenRunner">
+    <option name="delegateBuildToMaven" value="true" />
+  </component>
+  <component name="ProjectId" id="1TKixAnXVfjyp1P05gQnpXF1zSs" />
+  <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../test-spring-security" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.runner" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/static/images" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Maven.projet6-run">
+    <configuration name="StartWebApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.mkyong.StartWebApplication" />
+      <module name="main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.mkyong.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="projet6-run" type="MavenRunConfiguration" factoryName="Maven">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="spring-boot:run" />
+              </list>
+            </option>
+            <option name="pomFileName" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
+    <configuration name="StartWebApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="web-thymeleaf" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.mkyong.StartWebApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.StartWebApplication" />
+      <item itemvalue="Maven.projet6-run" />
+      <item itemvalue="Spring Boot.StartWebApplication" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.StartWebApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5af7163a-0185-4f8e-98ba-af13159f1e1d" name="Default Changelist" comment="" />
+      <created>1573215431724</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1573215431724</updated>
+      <workItem from="1573215437251" duration="7119000" />
+      <workItem from="1573308356307" duration="26000" />
+      <workItem from="1574087623768" duration="2650000" />
+      <workItem from="1574150712784" duration="2803000" />
+      <workItem from="1574155500374" duration="4441000" />
+      <workItem from="1574170569049" duration="9263000" />
+      <workItem from="1574237185899" duration="3111000" />
+      <workItem from="1574242198391" duration="2917000" />
+      <workItem from="1574258818416" duration="3726000" />
+      <workItem from="1574267389195" duration="2177000" />
+      <workItem from="1574279458550" duration="2775000" />
+      <workItem from="1574323437364" duration="1938000" />
+      <workItem from="1574348697561" duration="1172000" />
+      <workItem from="1574409031965" duration="1508000" />
+      <workItem from="1574429754939" duration="603000" />
+      <workItem from="1574521457285" duration="2557000" />
+      <workItem from="1574524863348" duration="832000" />
+      <workItem from="1574604630324" duration="2947000" />
+      <workItem from="1574608293557" duration="7632000" />
+      <workItem from="1574669381197" duration="2119000" />
+      <workItem from="1574689138743" duration="5954000" />
+      <workItem from="1574775270378" duration="9831000" />
+      <workItem from="1574861774332" duration="6463000" />
+      <workItem from="1574884551245" duration="5405000" />
+      <workItem from="1574928103198" duration="5400000" />
+      <workItem from="1574939248150" duration="1353000" />
+      <workItem from="1574948085906" duration="4232000" />
+      <workItem from="1574953739571" duration="4387000" />
+      <workItem from="1575014698866" duration="16448000" />
+      <workItem from="1575043474239" duration="1670000" />
+      <workItem from="1575121057959" duration="6873000" />
+      <workItem from="1575201049158" duration="2190000" />
+      <workItem from="1575207688353" duration="6792000" />
+      <workItem from="1575275556990" duration="5272000" />
+      <workItem from="1575293661204" duration="5871000" />
+      <workItem from="1575361877270" duration="6043000" />
+      <workItem from="1575380164837" duration="4589000" />
+      <workItem from="1575469007433" duration="8916000" />
+      <workItem from="1575554967791" duration="2565000" />
+      <workItem from="1575576527351" duration="1298000" />
+      <workItem from="1575620715677" duration="4538000" />
+      <workItem from="1575639366849" duration="3351000" />
+      <workItem from="1575643262430" duration="2892000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+</project>

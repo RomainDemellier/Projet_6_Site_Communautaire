@@ -1,0 +1,12 @@
+header {
+    text-align: center;
+    background-image: url(../images/image_header.png);
+    background-repeat: no-repeat;
+    background-position: center top;
+    height: 200px;
+    margin-top:25px;
+}
+
+body{
+    background-color: #e2ebee;
+}

@@ -1,0 +1,178 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Détails du site</title>
+
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.2.1/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/accueil.css}" />
+
+</head>
+
+<body>
+<div th:replace="fragments/topnav :: navbar"></div>
+<header>
+
+</header>
+<div class="container pl-5 pr-5" id="container">
+    <div class="card pl-5 pr-5 mb-4" style="background-color: #7AA2D1;color: white;">
+        <div class="card-header text-center" >
+            <h1 th:text="${ site.nom }"></h1>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title text-left" th:text="'Pays : ' + ${ site.nomPays }"></h5>
+            <h5 class="card-title text-left" th:text=" 'Département : ' + ${ site.nomDepartement }"></h5><hr>
+            <p class="card-text text-left mt-4" th:text="'Type : ' + ${ site.type }"></p><hr>
+            <p class="card-text text-left" th:text="'Hauteur : ' + ${ site.hauteur }"></p><hr>
+            <p class="card-text text-left" th:text="'Orientation : ' + ${ site.orientation }"></p><hr>
+            <p class="card-text text-left" th:text="'Voies : ' + ${ site.voies }"></p><hr>
+            <p class="card-text text-left" th:text="'Cotations : ' + ${ site.cotations }"></p>
+        </div>
+    </div>
+    <div th:each="commentaire: ${ site.commentaires }"  class="bg-dark mt-4 text-light pt-2 pl-3 pb-2 rounded position-relative" style="height: 100px">
+
+        <small class="mr-2 position-absolute text-info mt-2" style="top: 0px;right: 0px;" th:text="'publié par ' + ${commentaire.prenomAuteur} + ' ' + ${ commentaire.nomAuteur }"></small>
+            <!---->
+        <div th:text="${commentaire.contenu}" name="contenu"></div>
+        <div sec:authorize="hasAuthority('SUPER_MEMBER') || hasAuthority('MEMBER')" class="text-right position-absolute mb-2 mr-2" style="bottom: 0px;right: 0px;">
+            <button type="button" class="btn btn-warning btn-sm mr-2" data-toggle="modal" data-target="#modal-warning-modifier" th:onclick="'javascript:updateComment(\'' + ${commentaire.id} + '\');'" >Modifier</button>
+            <button type="button" data-toggle="modal" data-target="#modal-warning-supprimer" class="btn btn-danger mr-2 btn-sm" th:onclick="'javascript:deleteComment(\'' + ${commentaire.id} + '\');'">Supprimer</button>
+
+        </div>
+
+    </div>
+<!--    <form action="#" th:action="@{/deleteComment}" id="delete" method="post">
+        <input type="hidden" name="deleteComment" id="deleteComment">
+    </form>-->
+<!--    <form action="#" th:action="@{/updateComment}" id="update" method="post">
+        <input type="hidden" name="updateCommentId" id="updateCommentId">
+        <input type="hidden" name="updateCommentContenu" id="updateCommentContenu">
+    </form>
+    <form action="#" th:action="@{/cancelUpdateComment}" method="post" id="cancelUpdateComment"></form>-->
+<!--
+    <button class="btn btn-info mt-4" id="show-form" sec:authorize="isAuthenticated()" data-toggle="modal" data-target="#modal-warning-ajouter">Ajouter un commentaire</button>
+-->
+    <button class="btn btn-info mt-4" id="show-form" data-toggle="modal" data-target="#modal-warning-ajouter">Ajouter un commentaire</button>
+</div>
+
+<!-- Boite modale pour supprimer un commentaire -->
+
+<div class="modal modal-warning fade in" id="modal-warning-supprimer">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Supprimer un commentaire</h5>
+            </div>
+            <div class="modal-body">
+                <h3>Êtes vous sûr de vouloir supprimer ce commentaire?</h3>
+            </div>
+            <form action="#" th:action="@{/deleteComment}" id="deleteComment"  method="post">
+                <input type="hidden" id="hiddenDeleteComment" name="id">
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary pull-left" data-dismiss="modal">Close</button>
+                    <button id="confirmDelete" type="submit" class="btn btn-danger">Yes</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<!-- Boite modale pour ajouter un commentaire -->
+
+<div class="modal modal-warning fade in" th:id="modal-warning-ajouter" >
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Ajouter un commentaire</h5>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="#" th:action="@{/addComment}" id="addComment" class="mt-5">
+                    <!--<input type="hidden" name="commentaires" id="commentaires" th:field="*{commentaires}">-->
+                    <div class="form-group">
+                        <label for="commentaire" class="pl-2">Votre commentaire</label>
+                        <textarea name="commentaire" id="commentaire" cols="30" rows="5" class="form-control"></textarea>
+
+                    </div>
+                    <div class="float-left">
+                        <button type="submit" class="btn btn-primary mr-3">Envoyer</button>
+                        <button type="button" class="btn btn-secondary pull-left" data-dismiss="modal">Annuler</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Boite modale pour modifier un commentaire -->
+
+<div class="modal modal-warning fade in" th:id="modal-warning-modifier" >
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modifier ce commentaire</h5>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="#" th:action="@{/updateComment}" id="updateComment" class="mt-5">
+                    <input type="hidden" name="commentaires" id="commentaires">
+                    <input type="hidden" name="updateCommentId" id="updateCommentId">
+                    <div class="form-group">
+                        <label for="commentaire" class="pl-2">Votre commentaire</label>
+                        <textarea name="updateCommentContenu" id="updateCommentContenu" cols="30" rows="5" class="form-control"></textarea>
+
+                    </div>
+                    <div class="float-left">
+                        <button type="submit" class="btn btn-primary mr-3">Envoyer</button>
+                        <button type="button" class="btn btn-secondary pull-left" data-dismiss="modal">Annuler</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!---->
+
+<script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/webjars/bootstrap/4.2.1/js/bootstrap.min.js}"></script>
+<script type="text/javascript">
+
+    function deleteComment(id) {
+
+        $('#hiddenDeleteComment').val(id);
+/*        var supElt = event.target;
+        var idEltSup = supElt.getAttribute("name");
+        document.getElementById("hiddenDeleteComment").value = idEltSup;*/
+    }
+
+    function updateComment(id) {
+
+        $.ajax({
+            url: "/api/commentaires/" + id,
+            success: function (data){
+                console.log(data.id);
+                console.log(data.contenu);
+                $("#updateCommentId").val(data.id);
+                $("#updateCommentContenu").val(data.contenu);
+            }
+        })
+    }
+
+    function testJquery(){
+        console.log("dans test jquery");
+    }
+
+    $(document).ready(function(){
+       console.log("ready !");
+       testJquery();
+    });
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Inscription</title>
+
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.2.1/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/style-login.css}"/>
+
+</head>
+
+<body>
+
+<div class="container">
+    <div class="row">
+        <form action="#" th:action="@{/inscription}" th:object="${utilisateur}" method="post" id="formInscription" class="col-lg-5 offset-lg-4" >
+            <div  th:if="${ erreur != null }" class="text-center">
+                <small id="erreur" th:text="${ erreur }"></small>
+            <hr>
+            </div>
+            <h3 class="titreForm">Inscription</h3>
+            <div class="form-group">
+                <label for="firstName">Prénom : </label>
+                <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Prénom" th:value="${ prenom }" th:field="*{prenom}"/>
+            </div>
+            <div class="form-group">
+                <label for="name">Nom : </label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Nom" th:value="${ nom }" th:field="*{nom}"/>
+            </div>
+            <div class="form-group">
+                <label for="email">Email : </label>
+                <input type="text" class="form-control" id="email" name="email" placeholder="Email" th:value="${ email }" th:field="*{email}"/>
+            </div>
+            <div class="form-group">
+                <label for="password">Mot de passe : </label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Mot de passe" th:field="*{password}"/>
+            </div>
+            <div class="form-group">
+                <label for="confirmpassword">Confirmez votre mot de passe : </label>
+                <input type="password" class="form-control" id="confirmpassword" name="confirmPassword" placeholder="Confirmation du mot de passe" />
+            </div>
+            <button type="submit" class="btn btn-primary">Valider</button>
+        </form>
+    </div>
+</div>
+
+</main>
+<!-- /.container -->
+
+<script type="text/javascript" th:src="@{/webjars/bootstrap/4.2.1/js/bootstrap.min.js}"></script>
+</body>
+</html>
