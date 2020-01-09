@@ -1,0 +1,126 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Réserver un topo</title>
+
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.2.1/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/accueil.css}" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.css"/>
+
+
+</head>
+
+<body>
+
+<div th:replace="fragments/topnav :: navbar"></div>
+
+<header>
+
+</header>
+
+<div class="container">
+<!-- 	<ul>
+		<li th:each="topo: ${listToposReservation}" th:text="${topo.nom}"></li>
+	</ul> -->
+	<table id="listToposDispo" class="table table-bordered text-center responsive">
+		<thead>
+			<tr>
+	        	<th>Nom</th>
+	       		<th>Lieu</th>
+	       		<th>Auteur</th>
+	       		<th>Date de parution</th>
+	       		<th>Lien</th>
+	       	</tr>
+        </thead>
+        <tbody>
+        	<tr th:each="topo: ${listToposReservation}" class="bg-dark text-white">
+<!--         		<td><a class="btn btn-outline-info btn-sm align-middle" th:text="${topo.nom}" th:href="@{/reserver-un-topo/details-topo(topoId=${topo.id})}" style="width:150px"></a></td>
+ -->        	
+ 				<td class="align-middle"><b th:text="${topo.nom}"></b></td>	
+ 				<td class="align-middle" th:text="${topo.lieu}"></td>
+        		<td class="align-middle" th:text="${topo.auteur.prenom + ' ' + topo.auteur.nom}"></td>
+        		<td class="align-middle" th:text="${topo.dateParution}"></td>
+        		<td class="align-middle" style="width:80px"><a class="btn btn-primary btn-sm" th:href="@{/reserver-un-topo/details-topo(topoId=${topo.id})}">Voir</a></td>
+        	</tr>
+        </tbody>
+	</table>
+</div>
+
+<input type="hidden" id="utilisateurId" th:value="${utilisateur.id}">
+<script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/webjars/bootstrap/4.2.1/js/bootstrap.min.js}"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+<script type="text/javascript">
+/*    function handleOnChange() {
+        document.getElementById("formCritere").submit();
+    }*/
+    
+
+$(document).ready(function(){
+	
+    $('#listToposDispo thead tr th').each( function (i) {
+        
+        var title = $(this).text();
+        if(title != "Lien"){
+	         $(this).html( '<input class="form-control" type="text" placeholder="'+title+'" />' );
+	  
+	         $( 'input', this ).on( 'keyup change', function () {
+	             if ( table.column(i).search() !== this.value ) {
+	                 table
+	                     .column(i)
+	                     .search( this.value )
+	                     .draw();
+	             }
+	         } );
+        } else {
+       	 $(this).html("");
+        }
+	} );
+			        
+    var table =  $('#listToposDispo').DataTable({
+ 	     //responsive: true, 
+        columnDefs: [
+            { responsivePriority: 1, targets: 0 },
+            //{ responsivePriority: 10001, targets: 4 },
+            { responsivePriority: 2, targets: -1 }
+        ]   
+     }); 
+});	
+	
+/* 	var utilisateurId = $('#utilisateurId').val();
+	console.log(utilisateurId);
+	
+    $('#listToposDispo thead tr').clone(true).appendTo( '#listToposDispo thead' );
+    $('#listToposDispo thead tr:eq(1) th').each( function (i) {
+	        
+	        	var title = $(this).text();
+	        	if(title != "Lien"){
+			        $(this).html( '<input class="form-control" type="text" placeholder="Search '+title+'" />' );
+					 
+			        $( 'input', this ).on( 'keyup change', function () {
+			            if ( table.column(i).search() !== this.value ) {
+			                table
+			                    .column(i)
+			                    .search( this.value )
+			                    .draw();
+			            }
+			        } );
+	        	} else {
+	        		$(this).html("");
+	        	}
+
+	        
+    } );
+	
+	   var table = $('#listToposDispo').DataTable({
+		   	       orderCellsTop: true,
+		   	   });
+	}); */
+</script>
+
+</body>
+</html>

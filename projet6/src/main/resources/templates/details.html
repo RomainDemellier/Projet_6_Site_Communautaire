@@ -16,7 +16,7 @@
 <header>
 
 </header>
-<div class="container pl-5 pr-5" id="container">
+<div class="container pl-5 pr-5 pb-4" id="container">
     <div class="card pl-5 pr-5 mb-4" style="background-color: #7AA2D1;color: white;">
         <div class="card-header text-center" >
             <h1 th:text="${ site.nom }"></h1>
@@ -29,13 +29,21 @@
             <p class="card-text text-left" th:text="'Orientation : ' + ${ site.orientation }"></p><hr>
             <p class="card-text text-left" th:text="'Voies : ' + ${ site.voies }"></p><hr>
             <p class="card-text text-left" th:text="'Cotations : ' + ${ site.cotations }"></p>
+            <div sec:authorize="hasAuthority('SUPER_MEMBER') || hasAuthority('MEMBER')" th:if="${ !site.tag }">
+            	<form action="#" th:action="@{/taguer}" method="post">
+            		<!-- <input type="hidden" th:value="${ site.id }" name="siteId"> -->
+            		<button type="submit" class="btn btn-primary">Taguer ce site</button>
+            	</form>
+            </div>
+            <hr th:if="${ site.tag }">
+            <p th:if="${ site.tag }"><small class="text-dark"><b>Ce site est recommandé par les amis de l'escalade</b></small></p>
         </div>
     </div>
     <div th:each="commentaire: ${ site.commentaires }"  class="bg-dark mt-4 text-light pt-2 pl-3 pb-2 rounded position-relative" style="height: 100px">
 
         <small class="mr-2 position-absolute text-info mt-2" style="top: 0px;right: 0px;" th:text="'publié par ' + ${commentaire.prenomAuteur} + ' ' + ${ commentaire.nomAuteur }"></small>
             <!---->
-        <div th:text="${commentaire.contenu}" name="contenu"></div>
+        <div  th:text="${commentaire.contenu}" name="contenu"></div>
         <div sec:authorize="hasAuthority('SUPER_MEMBER') || hasAuthority('MEMBER')" class="text-right position-absolute mb-2 mr-2" style="bottom: 0px;right: 0px;">
             <button type="button" class="btn btn-warning btn-sm mr-2" data-toggle="modal" data-target="#modal-warning-modifier" th:onclick="'javascript:updateComment(\'' + ${commentaire.id} + '\');'" >Modifier</button>
             <button type="button" data-toggle="modal" data-target="#modal-warning-supprimer" class="btn btn-danger mr-2 btn-sm" th:onclick="'javascript:deleteComment(\'' + ${commentaire.id} + '\');'">Supprimer</button>
@@ -43,18 +51,8 @@
         </div>
 
     </div>
-<!--    <form action="#" th:action="@{/deleteComment}" id="delete" method="post">
-        <input type="hidden" name="deleteComment" id="deleteComment">
-    </form>-->
-<!--    <form action="#" th:action="@{/updateComment}" id="update" method="post">
-        <input type="hidden" name="updateCommentId" id="updateCommentId">
-        <input type="hidden" name="updateCommentContenu" id="updateCommentContenu">
-    </form>
-    <form action="#" th:action="@{/cancelUpdateComment}" method="post" id="cancelUpdateComment"></form>-->
-<!--
     <button class="btn btn-info mt-4" id="show-form" sec:authorize="isAuthenticated()" data-toggle="modal" data-target="#modal-warning-ajouter">Ajouter un commentaire</button>
--->
-    <button class="btn btn-info mt-4" id="show-form" data-toggle="modal" data-target="#modal-warning-ajouter">Ajouter un commentaire</button>
+
 </div>
 
 <!-- Boite modale pour supprimer un commentaire -->
@@ -144,6 +142,7 @@
     function deleteComment(id) {
 
         $('#hiddenDeleteComment').val(id);
+        
 /*        var supElt = event.target;
         var idEltSup = supElt.getAttribute("name");
         document.getElementById("hiddenDeleteComment").value = idEltSup;*/

@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Réserver un topo</title>
+
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.2.1/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/accueil.css}" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.css"/>
+
+
+</head>
+
+<body>
+
+<div th:replace="fragments/topnav :: navbar"></div>
+
+<header>
+
+</header>
+
+<!-- <h1 th:text="${topo.nom}"></h1>
+<p th:text="${topo.description}"></p>
+<p th:text="${topo.lieu}"></p>
+<p th:text="${topo.dateParution}"></p>
+<p th:text="${topo.auteur.prenom + ' ' + topo.auteur.nom}"></p> -->
+
+<div class="container pl-5 pr-5" id="container">
+    <div class="card pl-5 pr-5 mb-4" style="background-color: #FAC93C;color: black;">
+        <div class="card-header text-center" >
+            <h1 th:text="${ topo.nom }"></h1>
+        </div>
+        <div class="card-body">
+            <p class="card-text text-left mt-4" th:text="'Descriptif : ' + ${ topo.description }"></p><hr>
+            <p class="card-text text-left" th:text="'Lieu : ' + ${ topo.lieu }"></p><hr>
+            <p class="card-text text-left" th:text="'Date de parution : ' + ${ topo.dateParution }"></p><hr>
+            <p class="card-text text-left" th:text="'Statut : ' + ${ topo.statut }"></p><hr>
+            <p class="card-text text-left" th:text="'Auteur : ' + ${ topo.auteur.prenom + ' ' + topo.auteur.nom }"></p>
+            <form action="#" th:action="@{/demande-reservation}" method="post">
+            	<input type="hidden" name="topoId" th:value="${topo.id}">
+            	<button type="submit" class="btn btn-primary">Faire une demande de réservation</button>
+            </form>
+            
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/webjars/bootstrap/4.2.1/js/bootstrap.min.js}"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.js"></script>
+<script type="text/javascript">
+/*    function handleOnChange() {
+        document.getElementById("formCritere").submit();
+    }*/
+    
+
+$(document).ready(function(){
+	
+	});
+
+
+</script>
+
+</body>
+</html>

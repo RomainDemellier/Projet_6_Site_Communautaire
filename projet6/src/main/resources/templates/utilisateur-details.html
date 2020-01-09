@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Modifier le role</title>
+
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.2.1/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/accueil.css}" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.css"/>
+
+
+</head>
+
+<body class="pb-5">
+
+<div th:replace="fragments/topnav :: navbar"></div>
+
+<header class="">
+
+</header>
+<h2 class="text-center" th:text="${'Editer le role de ' + utilisateurDetails.prenom + ' ' + utilisateurDetails.nom}"></h2>
+<div class="container pl-5 pr-5">	
+	<form class="bg-success pl-5 pr-5 pt-5 pb-5 rounded" action="#" th:action="@{/utilisateur-details}" method="post" th:object="${utilisateurDetails}">
+		<div class="form-group">
+			<label for="nom">Nom</label>
+			<input class="form-control" type="text" name="nom" id="nom" th:value="${utilisateurDetails.nom}" th:field="*{nom}" disabled>
+		</div>
+		<div class="form-group">
+			<label for="prenom">Prénom</label>
+			<input class="form-control" type="text" name="prenom" id="prenom" th:value="${utilisateurDetails.prenom}" th:field="*{prenom}" disabled>
+		</div>
+		<div class="form-group">
+			<label for="eamil">Email</label>
+			<input class="form-control" type="email" name="email" id="email" th:value="${utilisateurDetails.email}" th:field="*{email}" disabled>
+		</div>
+		<div class="form-group">
+			<label for="role">Role</label>
+				<select class="form-control" name="role" id="role" th:field="*{role}">
+					<option th:selected="${utilisateurDetails.role == 'USER'}" value="USER">USER</option>
+					<option th:selected="${utilisateurDetails.role == 'MEMBER'}" value="MEMBER">MEMBER</option>
+					<option th:selected="${utilisateurDetails.role == 'SUPER_MEMBER'}" value="SUPER_MEMBER">SUPER_MEMBER</option>
+				</select>
+		</div>
+		<input type="hidden" name="id" th:value="${utilisateurDetails.id}">
+		<button type="submit" class="btn btn-primary">Editer</button>
+	</form>
+</div>
+<script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/webjars/bootstrap/4.2.1/js/bootstrap.min.js}"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.js"></script>
+<script type="text/javascript">
+
+/* $(document).ready(function(){
+	
+     $('#siteList thead tr').clone(true).appendTo( '#siteList thead' );
+     $('#siteList thead tr:eq(1) th').each( function (i) {
+	        
+	        	var title = $(this).text();
+	        	if(title != "Lien"){
+			        $(this).html( '<input class="form-control" type="text" placeholder="'+title+'" />' );
+					 
+			        $( 'input', this ).on( 'keyup change', function () {
+			            if ( table.column(i).search() !== this.value ) {
+			                table
+			                    .column(i)
+			                    .search( this.value )
+			                    .draw();
+			            }
+			        } );
+	        	} else {
+	        		$(this).html("");
+	        		
+	        	}
+
+	        
+    } ); 
+     
+   var table =  $('#siteList').DataTable({
+	   "searching": false       
+    });    
+}); */
+
+
+</script>
+
+</body>
+</html>

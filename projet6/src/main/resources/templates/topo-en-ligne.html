@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Topo en ligne</title>
+
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.2.1/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/style-login.css}"/>
+
+</head>
+
+<body>
+
+<div class="container">
+    <div class="row">
+        <form action="#" th:action="@{/topo-en-ligne}" th:object="${topo}" method="post" id="formTopo" class="col-lg-5 offset-lg-4" >
+            <div  th:if="${ erreur != null }" class="text-center">
+                <small id="erreur" th:text="${ erreur }"></small>
+            <hr>
+            </div>
+            <h3 class="titreForm">Mettre un Topo en ligne </h3>
+
+            <div class="form-group">
+                <label for="nom">Nom du topo : </label>
+                <input type="text" class="form-control" id="nom" name="nom" placeholder="Nom du topo" th:value="${ topo.nom }" th:field="*{nom}"/>
+            </div>
+            <div class="form-group">
+            	<label for="description">Descriptif : </label>
+            	<textarea class="form-control" id="description" name="description" th:value="${ topo.description }" th:field="*{description}"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="lieu">Lieu : </label>
+                <input type="text" class="form-control" id="lieu" name="lieu" placeholder="Lieu" th:value="${ topo.lieu }" th:field="*{lieu}"/>
+            </div>
+            <button type="submit" class="btn btn-primary" name="validerTopo" value="validerTopo">Valider</button>
+        </form>
+    </div>
+</div>
+
+</main>
+<!-- /.container -->
+
+<script type="text/javascript" th:src="@{/webjars/bootstrap/4.2.1/js/bootstrap.min.js}"></script>
+<script type="text/javascript">
+
+</script>
+</body>
+</html>

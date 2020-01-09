@@ -1,17 +1,22 @@
 package com.mkyong.services;
 
+import com.mkyong.beans.Topo;
 import com.mkyong.beans.Utilisateur;
 import com.mkyong.exceptions.EmailException;
 import com.mkyong.exceptions.LoginException;
 import com.mkyong.exceptions.ResourceNotFoundException;
+import com.mkyong.exceptions.TopoException;
 import com.mkyong.exceptions.UtilisateurException;
 import com.mkyong.repositories.UtilisateurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import javax.persistence.EntityManager;
 
 @Service
 public class UtilisateurService {
@@ -63,6 +68,11 @@ public class UtilisateurService {
 
         return utilisateurRepository.save(utilisateur);
     }
+    
+    public Utilisateur editUtilisateur(Utilisateur utilisateur) {
+    	
+    	return this.utilisateurRepository.save(utilisateur);
+    }
 
     public Utilisateur findByEmail(String email){
         return utilisateurRepository.findByEmail(email);
@@ -87,5 +97,9 @@ public class UtilisateurService {
         } else {
             throw new LoginException("Email ou mot de passe incorrect");
         }
+    }
+    
+    public List<Utilisateur> getAllUtilisateurs(Long id){
+    	return this.utilisateurRepository.findByIdNot(id);
     }
 }

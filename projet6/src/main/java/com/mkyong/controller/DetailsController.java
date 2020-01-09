@@ -30,7 +30,7 @@ public class DetailsController {
     private UtilisateurService utilisateurService;
 
     @Autowired
-    private CommentaireService idCommentaireService;
+    private CommentaireService commentaireService;
 
     private Site site;
     private Utilisateur utilisateur = null;
@@ -47,41 +47,42 @@ public class DetailsController {
             //System.out.println("dans anonymous user");
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
             String email = userDetails.getUsername();
-            utilisateur = utilisateurService.findByEmail(email);
+            this.utilisateur = utilisateurService.findByEmail(email);
         }
 
         ModelAndView mv = new ModelAndView();
-/*        if(!hasSubmit && idSite == null){
-            System.out.println("redirection vers home");
-            mv.setViewName("redirect:/home");
-            return mv;
-        } else if(!hasSubmit){
-            System.out.println("Vers Details");
-            //site = siteService.findById(idSite);
-        }*/
+
         if(!hasSubmit && idSite == null){
             System.out.println("redirection vers home");
             mv.setViewName("redirect:/home");
             return mv;
         }
         if(idSite != null){
-            site = siteService.findById(idSite);
+            this.site = siteService.findById(idSite);
         }
         mv.setViewName("details");
         mv.addObject("site",site);
         mv.addObject("utilisateur",utilisateur);
-        /*if(!hasSubmit){
-            site = siteService.findById(idSite);
-            utilisateur = utilisateurService.findById(idUtilisateur);
-        }
-        model.addAttribute("site",site);
-        model.addAttribute("utilisateur",utilisateur);
-        return "details";*/
+
+        return mv;
+    }
+    
+    @PostMapping("/taguer")
+    @PreAuthorize("hasAuthority('MEMBER') or hasAuthority('SUPER_MEMBER')")
+    public ModelAndView taguer() {
+    	ModelAndView mv = new ModelAndView();
+        hasSubmit = true;
+        
+        this.site.setTag(true);
+        this.site = this.siteService.editSite(site);
+        
+        mv.setViewName("redirect:/details");
+        
         return mv;
     }
 
     @PostMapping("/addComment")
-    @PreAuthorize("hasRole('USER') or hasRole('MEMBER') or hasRole('SUPER_MEMBER')")
+    @PreAuthorize("isAuthenticated()")
     public ModelAndView addComment(@RequestParam(name = "commentaire",required = false) String contenu){
 
         ModelAndView mv = new ModelAndView();
@@ -100,6 +101,7 @@ public class DetailsController {
     }
 
     @PostMapping("/updateComment")
+    @PreAuthorize("hasAuthority('MEMBER') or hasAuthority('SUPER_MEMBER')")
     public ModelAndView updateComment(@RequestParam(name = "updateCommentId", required = false) Long idComment,
                         @RequestParam(name = "updateCommentContenu", required = false) String contenu){
 
@@ -130,52 +132,14 @@ public class DetailsController {
         return mv;
     }
 
-    //@PostMapping("/deleteComment")
-/*    @GetMapping("/deleteComment")
-    public ModelAndView deleteComment(@RequestParam(name = "id", required = false) Long idComment){
-        System.out.println("dans Get delete : " + idComment);
-        if(idComment != null){
-            System.out.println("id idCommentaire : " + idComment);
-            //idCommentaireService.deleteCommentaire(idComment);
-            List<Commentaire> idCommentaires = this.site.getCommentaires();
-            Iterator li = idCommentaires.iterator();
-            while (li.hasNext()){
-                Commentaire com = (Commentaire) li.next();
-                if(com.getId() == idComment){
-                    System.out.println("Dans remove.");
-                    li.remove();
-                    break;
-                }
-            }
-            this.site.setCommentaires(idCommentaires);
-            this.site = siteService.editSite(site);
-        } else {
-            System.out.println("idComment null");
-        }
-        ModelAndView mv = new ModelAndView();
-        hasSubmit = true;
-        mv.setViewName("redirect:/details");
-        return mv;
-    }*/
-
 
     @PostMapping("/deleteComment")
+    @PreAuthorize("hasAuthority('MEMBER') or hasAuthority('SUPER_MEMBER')")
     public ModelAndView deleteCommentPost(@RequestParam(name = "id", required = false) Long idComment){
         System.out.println("dans Post delete : " + idComment);
         if(idComment != null){
             System.out.println("id idCommentaire : " + idComment);
-            //idCommentaireService.deleteCommentaire(idComment);
-            List<Commentaire> idCommentaires = this.site.getCommentaires();
-            Iterator li = idCommentaires.iterator();
-            while (li.hasNext()){
-                Commentaire com = (Commentaire) li.next();
-                if(com.getId() == idComment){
-                    System.out.println("Dans remove.");
-                    li.remove();
-                    break;
-                }
-            }
-            this.site.setCommentaires(idCommentaires);
+            this.site.deleteCommentaire(idComment);
             this.site = siteService.editSite(site);
         } else {
             System.out.println("idComment null");
@@ -186,11 +150,4 @@ public class DetailsController {
         return mv;
     }
 
-    @PostMapping("/cancelUpdateComment")
-    public ModelAndView cancelUpdateComment(){
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("redirect:/details");
-        hasSubmit = true;
-        return mv;
-    }
 }

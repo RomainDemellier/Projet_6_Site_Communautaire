@@ -13,7 +13,7 @@
 
 <body>
 <div th:fragment="navbar" xmlns:sec="http://www.w3.org/1999/xhtml">
-    <nav class="navbar navbar-expand-lg navbar-light bg-info" style="background-color: #e3f2fd;">
+    <nav class="navbar navbar-expand-lg navbar-light bg-info fixed-top" style="background-color: #e3f2fd;">
         <a class="navbar-brand" href="#">Les amis de l'escalade</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -22,10 +22,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" th:href="@{/home}">Home <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+                <li class="nav-item" sec:authorize="hasAuthority('SUPER_MEMBER')">
+                    <a class="nav-link" th:href="@{/allUtilisateurs}">Administrer</a>
                 </li>
             </ul>
             <!--        <form class="form-inline my-2 my-lg-0">
@@ -40,11 +40,13 @@
 
                     </button>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Mes topos</a>
+                        <a class="dropdown-item" href="#" th:href="@{/mes-topos}">Mes topos</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Créer un topo</a>
+                        <a class="dropdown-item" href="#" th:href="@{/topo-en-ligne}">Mettre en ligne un topo</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Partager un site</a>
+                        <a class="dropdown-item" href="#" th:href="@{/reserver-un-topo}">Réserver un topo</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#" th:href="@{/partager-site}">Partager un site</a>
                     </div>
                 </div>
                 <form method="post" action="#" th:action="@{/logout}" class="d-inline-block">

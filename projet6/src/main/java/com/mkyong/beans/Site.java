@@ -8,6 +8,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @Entity
@@ -46,6 +47,8 @@ public class Site implements Serializable {
     @JoinColumn(name = "id_site")
     @NotFound(action = NotFoundAction.IGNORE)
     private List<Commentaire> commentaires = new ArrayList<Commentaire>();
+    
+    private boolean tag = false;
 
     public Site(){
         super();
@@ -139,9 +142,31 @@ public class Site implements Serializable {
         this.commentaires = commentaires;
     }
 
-    public void addCommentaire(Commentaire commentaire){
+    public boolean isTag() {
+		return tag;
+	}
+
+	public void setTag(boolean tag) {
+		this.tag = tag;
+	}
+
+	public void addCommentaire(Commentaire commentaire){
         this.commentaires.add(commentaire);
     }
+    
+	public void deleteCommentaire(Long id) {
+		List<Commentaire> list = this.commentaires;
+		Iterator li = list.iterator();
+		Commentaire c;
+		while(li.hasNext()) {
+			c = (Commentaire) li.next();
+			if(c.getId() == id) {
+				li.remove();
+				break;
+			}
+		}
+		this.setCommentaires(list);
+	}
 
     public String toString(){
         String str = "";

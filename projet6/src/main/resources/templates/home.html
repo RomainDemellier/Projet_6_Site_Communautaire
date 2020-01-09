@@ -17,131 +17,106 @@
 
 <div th:replace="fragments/topnav :: navbar"></div>
 
-<header>
+<header class="">
 
 </header>
 
 <div class="container">
-    <table id="siteList" class="table table-striped table-bordered">
+    <table id="siteList" class="table table-bordered text-center responsive">
         <thead>
-        <th>Nom</th>
-        <th>Pays</th>
-        <th>Département</th>
-        <th>Type</th>
-        <th>Hauteur</th>
-        <th>Voies</th>
-        <th>Orientation</th>
-        <th>Cotations</th>
-        <th>Lien</th>
-        <!--<th><a href="#" class="btn btn-primary">Lien</a></th>-->
+        <tr >
+	        <th>Nom</th>
+	        <th>Pays</th>
+	        <th>Département</th>
+	        <th>Type</th>
+	        <th>Hauteur</th>
+	        <th>Orientation</th>
+	        <th>Cotations</th>
+	        <th>Voies</th>
+	        <th>Lien</th>
+	        
+        </tr>
         </thead>
-        <tbody></tbody>
+        <tbody>
+        	<tr th:each="site: ${listSites}" class="bg-dark text-white">
+<!--         		<td class="align-middle"><a th:text="${site.nom}" class="btn btn-outline-info btn-sm" th:href="@{/details(idSite=${site.id})}" style=""></a></td>
+ -->
+ 				<td class="align-middle"><b th:text="${site.nom}" ></b></td>	
+         		<td class="align-middle" th:text="${site.nomPays}"></td>
+        		<td class="align-middle" th:text="${site.nomDepartement}"></td>
+        		<td class="align-middle" th:text="${site.type}"></td>
+        		<td class="align-middle" th:text="${site.hauteur}"></td>
+        		<td class="align-middle" th:text="${site.orientation}"></td>
+        		<td class="align-middle" th:text="${site.cotations}"></td>
+        		<td class="align-middle" th:text="${site.voies}"></td>
+        		<td class="align-middle" style="width:80px"><a class="btn btn-primary btn-sm" th:href="@{/details(idSite=${site.id})}">Lien</a></td>
+        		
+        	</tr>
+        </tbody>
+<!--         <tfoot>
+        	<tr>
+		        <th>Nom</th>
+		        <th>Pays</th>
+		        <th>Département</th>
+		        <th>Type</th>
+		        <th>Hauteur</th>
+		        <th>Orientation</th>
+		        <th>Cotations</th>
+		        <th>Voies</th>
+		       
+        	</tr>
+        </tfoot> -->
     </table>
 </div>
 
-<!--<form action="#" th:action="@{/home}" method="post" id="formCritere">
-    <div class="container">
-        <div class="row" id="menuCritere" style="background-color: orange; padding: 10px; border-radius: 5px;">
-            <select name="pays" id="pays" onchange="handleOnChange()" class="col-lg-2 col-md-3 ml-5 custom-select">
-                <option value="0">Pays</option>
-                <option th:each="pays: ${ listePays }" th:value="${ pays.nom }" th:text="${ pays.nom }" th:selected="${ pays.nom == nomPays }"></option>
-            </select>
-            <select name="departement" id="departement" onchange="handleOnChange()" class="col-lg-2 col-md-4 ml-4 custom-select">
-                <option value="0">Departement</option>
-                <option th:each="departement: ${ listeDepartement }" th:value="${ departement.nom }" th:text="${ departement.nom }" th:selected="${ departement.nom == nomDepartement }"></option>
-            </select>
-            <select name="site" id="site" onchange="handleOnChange()" class="col-lg-2 col-md-3 ml-4 custom-select">
-                <option value="0">Site</option>
-                <option th:each="site: ${ listeSite }" th:value="${ site.id }" th:text="${ site.nom }" th:selected="${ site.id == idSite }"></option>
-            </select>
-            <select name="type" id="type" onchange="handleOnChange()" class="col-lg-2 col-md-3 ml-4 custom-select">
-                <option value="0">Type</option>{ cotation.difficulte
-                <option th:each="type: ${ listeType }" th:value="${ type.nom }" th:text="${ type.nom }" th:selected="${ type.nom == nomType }"></option>
-            </select>
-            <select name="cotation" id="cotation" onchange="handleOnChange()" class="col-lg-2 col-md-3 ml-4 custom-select">
-                <option value="0">Cotation</option>
-                <option th:each="cotation: ${ listeCotation }" th:value="${ cotation.difficulte }" th:text="${ cotation.difficulte }" th:selected="${ cotation.difficulte == difCotation }"></option>
-            </select>
-        </div>
-    </div>
-</form>
-
-<div class="container">
-    <div class="row pl-5 pr-5">
-        <div class="card col-lg-5 mt-4 ml-5" th:each="articleSite, state: ${ listeArticleSite }">
-            <div class="card-header text-center" th:text="${ articleSite.nom }">
-            </div>
-            <div class="card-body">
-                <h5 class="card-title text-left" th:text="'Pays : ' + ${ articleSite.nomPays }"></h5>
-                <h5 class="card-title text-left" th:text=" 'Département : ' + ${ articleSite.nomDepartement }"></h5><hr>
-                <p class="card-text text-right mt-4" th:text="'Type : ' + ${ articleSite.type }"></p><hr>
-                <p class="card-text text-right" th:text="'Hauteur : ' + ${ articleSite.hauteur }"></p><hr>
-                <p class="card-text text-right" th:text="'Orientation : ' + ${ articleSite.orientation }"></p><hr>
-                <p class="card-text text-right" th:text="'Voies : ' + ${ articleSite.voies }"></p><hr>
-                <p class="card-text text-right" th:text="'Cotations : ' + ${ articleSite.cotations }"></p>
-                <a th:href="@{/details(idSite=${articleSite.id})}" class="btn btn-primary" th:text="'Voir le site ' + ${ articleSite.nom }"></a>
-            </div>
-        </div>
-    </div>
-</div>-->
 <script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
 <script type="text/javascript" th:src="@{/webjars/bootstrap/4.2.1/js/bootstrap.min.js}"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
 <script type="text/javascript">
 /*    function handleOnChange() {
         document.getElementById("formCritere").submit();
     }*/
 
 $(document).ready(function(){
-   $('#siteList').DataTable({
-        pageLength: 5,
-       ajax: {
-            url: '/api/allSites',
-           dataSrc: ''
-       },
-       columns:[
-           {
-               title: 'Nom',
-               data: 'nom'
-           },
-           {
-               title: 'Pays',
-               data: 'nomPays'
-           },
-           {
-               title: 'Département',
-               data: 'nomDepartement'
-           },
-           {
-               title: 'Type',
-               data: 'type'
-           },
-           {
-               title: 'Hauteur',
-               data: 'hauteur'
-           },
-           {
-               title: 'Orientation',
-               data: 'orientation'
-           },
-           {
-               title: 'Cotations',
-               data: 'cotations'
-           },
-           {
-               title: 'Voies',
-               data: 'voies'
-           },
-           {
-               title: 'Lien',
-               data: 'id',
-               render: function(data){
-                   return '<a class="btn btn-primary" href="/details?idSite=' + data +'">Lien</a>';
-               }
-           }
-       ]
-   });
-});
+	
+     //$('#siteList thead tr').clone(true).appendTo( '#siteList thead' );
+     $('#siteList thead tr th').each( function (i) {
+	        
+         var title = $(this).text();
+         if(title != "Lien"){
+	         $(this).html( '<input class="form-control" type="text" placeholder="'+title+'" />' );
+	  
+	         $( 'input', this ).on( 'keyup change', function () {
+	             if ( table.column(i).search() !== this.value ) {
+	                 table
+	                     .column(i)
+	                     .search( this.value )
+	                     .draw();
+	             }
+	         } );
+         } else {
+        	 $(this).html("");
+         }
+	} );
+			        
+     var table =  $('#siteList').DataTable({
+  	     //responsive: true, 
+         columnDefs: [
+             { responsivePriority: 1, targets: 0 },
+             //{ responsivePriority: 10001, targets: 4 },
+             { responsivePriority: 2, targets: -1 }
+         ]   
+      }); 
+	        
+} ); 
+     
+
+     
+
+   
+
+
 
 </script>
 

@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Historique des réservations</title>
+
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.2.1/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/accueil.css}" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.css"/>
+
+
+</head>
+
+<body>
+
+<div th:replace="fragments/topnav :: navbar"></div>
+
+<header class="">
+
+</header>
+
+<h2 class="text-center mt-4 mb-4" th:if="${!listReservation.isEmpty()}" th:text="${ 'Voici la liste des résevations effectués pour le topo ' + topo.nom }"></h2>
+
+<h2 class="text-center mt-4 mb-4" th:if="${listReservation.isEmpty()}" th:text="${'Il n y a eu aucune réservation pour le topo ' + topo.nom}"></h2>
+
+<div class="container" th:if="${!listReservation.isEmpty()}">
+<!-- 	<table class="table table-bordered table-dark">
+		<thead>
+			<th>Nom de l'emprunteur</th>
+			<th>Prénom de l'emprunteur</th>
+			<th>Du</th>
+			<th>Jusqu'au</th>
+		</thead>
+		<tbody>
+			<tr th:each="reservation: ${ listReservation }">
+				<td th:text="${ reservation.emprunteurNom }"></td>
+				<td th:text="${ reservation.emprunteurPrenom }"></td>
+				<td th:text="${ reservation.dateDebut }"></td>
+				<td th:text="${ reservation.dateFin }"></td>
+			</tr>
+		</tbody>
+	</table> -->
+	<ul class="list-group">
+		<li class="list-group-item" th:each="reservation: ${ listReservation }">
+ 			<b th:if="${reservation.dateFin != null}" th:text="${ reservation.emprunteurPrenom + ' ' + reservation.emprunteurNom + ' a emprunté ce topo du ' + reservation.dateDebut + ' au ' + reservation.dateFin + '.' }"></b>
+			<b th:if="${reservation.dateFin == null}" th:text="${ reservation.emprunteurPrenom + ' ' + reservation.emprunteurNom + ' a emprunté ce topo le ' + reservation.dateDebut + ' et est toujours en possession de ce topo.' }"></b>
+		</li>
+	</ul>
+</div>
+<script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/webjars/bootstrap/4.2.1/js/bootstrap.min.js}"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.js"></script>
+<script type="text/javascript">
+
+
+
+</script>
+
+</body>
+</html>

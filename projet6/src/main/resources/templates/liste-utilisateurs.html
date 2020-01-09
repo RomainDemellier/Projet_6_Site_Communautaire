@@ -1,0 +1,95 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Administrer</title>
+
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.2.1/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/accueil.css}" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.css"/>
+
+
+</head>
+
+<body>
+
+<div th:replace="fragments/topnav :: navbar"></div>
+
+<header class="">
+
+</header>
+
+<div class="container">
+
+	<table id="table" class="table table-bordered text-center responsive">
+		<thead>
+			<tr>
+				<th>Nom</th>
+				<th>Prénom</th>
+				<th>Email</th>
+				<th>Role</th>
+				<th>Modifier</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="util: ${listUtilisateurs}">
+				<!-- <td class="align-middle"><a class="btn btn-outline-info btn-sm" th:text="${util.nom}" th:href="@{/utilisateur-details(utilisateurId=${util.id})}" style="width:120px"></a></td>
+				 -->
+				<td class="align-middle" th:text="${util.nom}"></td>
+				<td class="align-middle" th:text="${util.prenom}"></td>
+				<td class="align-middle" th:text="${util.email}"></td>
+				<td class="align-middle" th:text="${util.role}"></td>
+				<td class="align-middle"><a class="btn btn-info btn-sm" th:href="@{/utilisateur-details(utilisateurId=${util.id})}">Modifier</a></td>
+			</tr>
+		</tbody>
+	</table>
+	
+</div>
+<script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/webjars/bootstrap/4.2.1/js/bootstrap.min.js}"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function(){
+
+    $('#table thead tr th').each( function (i) {
+        
+        var title = $(this).text();
+        if(title != "Modifier"){
+	         $(this).html( '<input class="form-control" type="text" placeholder="'+title+'" />' );
+	  
+	         $( 'input', this ).on( 'keyup change', function () {
+	             if ( table.column(i).search() !== this.value ) {
+	                 table
+	                     .column(i)
+	                     .search( this.value )
+	                     .draw();
+	             }
+	         } );
+        } else {
+       	 $(this).html("");
+        }
+	} );
+			        
+    var table =  $('#table').DataTable({
+ 	     //responsive: true, 
+        columnDefs: [
+            { responsivePriority: 1, targets: 0 },
+            //{ responsivePriority: 10001, targets: 4 },
+            { responsivePriority: 2, targets: -1 }
+        ]   
+     }); 
+	
+/* 	$('#table').DataTable({
+		//responsive: true
+	});	 */
+}); 
+
+
+</script>
+
+</body>
+</html>

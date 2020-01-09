@@ -1,0 +1,126 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Mes topos</title>
+
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.2.1/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/accueil.css}" />
+
+</head>
+
+<body>
+<div th:replace="fragments/topnav :: navbar"></div>
+<header>
+
+</header>
+<h1 class="text-center">Mes Topos</h1>
+<h2 class="text-center mt-5" th:if="${ listTopos.isEmpty() }">Vous n'avez publié aucun topo.</h2>
+<!-- <ul>
+	<li th:each="topo: ${listTopos}" th:text="${topo.nom}"></li>
+</ul> -->
+<div class="container">
+	<table class="table table-bordered table-striped table-dark text-center mb-4" th:if="${!listTopos.isEmpty()}">
+		<thead>
+			<th>Nom</th>
+			<th>Lieu</th>
+			<th>Statut</th>
+			<th>Détails</th>
+<!-- 			<th>Historique</th>
+			<th>Supprimer</th> -->
+		</thead>
+		<tbody>
+			<tr th:each="topo: ${listTopos}">
+				<td th:text="${topo.nom}"></td>
+				<td th:text="${topo.lieu}"></td>
+				<td th:text="${topo.statut}"></td>
+				<td><a class="btn btn-info" th:href="@{/mes-topos/details-mon-topo(topoId=${topo.id})}">Détails</a></td>
+			<!-- 	<td><a class="btn btn-primary" th:href="@{/historique(topoId=${topo.id})}">Historique</a></td>
+				<td><button th:if="${topo.statut == 'Disponible'}" class="btn btn-danger" th:onclick="'javascript:deleteTopo(\'' + ${topo.id} + '\');'">Supprimer</button></td>
+			 --></tr>
+		</tbody>
+	</table>
+</div>
+<hr>
+<h2 th:if="${listToposDemandeReservation.isEmpty()}" class="text-center mt-4">Vous n'avez fait aucune demande pour réserver un topo.</h2>
+<div th:if="${!listToposDemandeReservation.isEmpty()}" class="container mt-5">
+	<h2 class="text-center">Vous avez fait une demande de réservation pour : </h2>
+	<table class="table table-striped table-bordered table-dark text-center">
+		<thead class="">
+			<th>Nom</th>
+			<th>Lieu</th>
+			<th>Auteur</th>
+			<th>Date de parution</th>
+			<th>Annuler la réservation</th>
+		</thead>
+		<tbody>
+			<tr th:each="topoDemandeReservation: ${ listToposDemandeReservation }">
+				<td th:text="${topoDemandeReservation.nom}"></td>
+				<td th:text="${topoDemandeReservation.lieu}"></td>
+				<td th:text="${ topoDemandeReservation.auteur.prenom + ' ' + topoDemandeReservation.auteur.nom }"></td>
+				<td th:text="${topoDemandeReservation.dateParution}"></td>
+				<td><a class="btn btn-primary" th:onclick="'javascript:annulerReservationTopo(\'' + ${topoDemandeReservation.id} + '\');'">Annuler</a></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+<hr>
+
+<h2 th:if="${listToposReserves.isEmpty()}" class="text-center mt-4">Vous ne disposez d'aucun topo.</h2>
+<div th:if="${!listToposReserves.isEmpty()}" class="container mt-5">
+	<h2 class="text-center">Vous disposez des topos suivants : </h2>
+	<table class="table table-striped table-bordered table-dark text-center">
+		<thead class="">
+			<th>Nom</th>
+			<th>Lieu</th>
+			<th>Auteur</th>
+			<th>Date de parution</th>
+			<th>Rendre le topo</th>
+		</thead>
+		<tbody>
+			<tr th:each="topoReserve: ${ listToposReserves }">
+				<td th:text="${topoReserve.nom}"></td>
+				<td th:text="${topoReserve.lieu}"></td>
+				<td th:text="${ topoReserve.auteur.prenom + ' ' + topoReserve.auteur.nom }"></td>
+				<td th:text="${topoReserve.dateParution}"></td>
+				<td><a class="btn btn-primary" th:onclick="'javascript:rendreTopo(\'' + ${topoReserve.id} + '\');'">Rendre</a></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+	
+	
+<form action="#" th:action="@{/deleteTopo}" id="deleteTopo" method="post">
+	<input type="hidden" id="topoId" name="topoId">
+</form>
+
+<form action="#" th:action="@{/rendreTopo}" id="rendreTopo" method="post">
+	<input type="hidden" id="rendreTopoId" name="rendreTopoId">
+</form>
+
+<form action="#" th:action="@{/annulerReservationTopo}" id="annulerReservationTopo" method="post">
+	<input type="hidden" id="annulerTopoId" name="annulerTopoId">
+</form>
+
+<script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/webjars/bootstrap/4.2.1/js/bootstrap.min.js}"></script>
+<script type="text/javascript">
+
+function deleteTopo(id){
+	$('#topoId').val(id);
+	$('#deleteTopo').submit();
+}
+
+function rendreTopo(id){
+	$('#rendreTopoId').val(id);
+	$('#rendreTopo').submit();
+}
+
+</script>
+
+</body>
+</html>

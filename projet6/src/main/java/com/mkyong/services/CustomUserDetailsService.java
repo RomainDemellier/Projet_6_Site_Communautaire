@@ -18,6 +18,10 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
     private UtilisateurRepository utilisateurRepository;
+    
+    public CustomUserDetailsService() {
+    	super();
+    }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
