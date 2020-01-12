@@ -82,9 +82,10 @@
 
     var paysElt = document.getElementById("pays");
     var departementElt = document.getElementById("departement");
+    departementElt.setAttribute("disabled","disabled");
 
     function handleOnChange(){
-        if(paysElt.value != 1){
+        if(paysElt.value != "France"){
             departementElt.setAttribute("disabled","disabled");
         } else {
             departementElt.removeAttribute("disabled");
