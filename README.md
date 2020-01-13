@@ -1,4 +1,6 @@
 # Projet_6_Site_Communautaire
+ 
+Cette application a été testée avec la version 8.5 de tomcat.
 
 Commencez par clonez le code de l'application en tapant en ligne de commande :
 
