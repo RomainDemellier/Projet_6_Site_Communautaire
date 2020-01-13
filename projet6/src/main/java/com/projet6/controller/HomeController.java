@@ -41,21 +41,10 @@ public class HomeController {
     
     private List<Site> listSites = new ArrayList<Site>();
 
-//    private List<Pays> listePays = new ArrayList<Pays>();
-//    private List<Departement> listeDepartement = new ArrayList<Departement>();
-//    private List<Site> listeSite = new ArrayList<Site>();
-//    private List<Site> listeArticleSite = new ArrayList<Site>();
-//    private List<Type> listeType = new ArrayList<Type>();
-//    private List<Cotation> listeCotation = new ArrayList<Cotation>();
-//
-//
-//    private String nomPays = "0";
-//    private String nomDepartement = "0";
-//    private Long idSite = new Long(0);
-//    private String nomType = "0";
-//    private String difCotation = "0";
-//
-//    private Boolean hasSubmit = false;
+    @GetMapping("/")
+    public String redirectHome() {
+    	return "redirect:/home";
+    }
 
     @GetMapping("/home")
     public String home(Model model){

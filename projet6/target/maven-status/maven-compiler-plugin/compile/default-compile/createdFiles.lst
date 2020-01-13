@@ -37,7 +37,6 @@ com/projet6/services/SiteService.class
 com/projet6/StartWebApplication.class
 com/projet6/controller/TopoController.class
 com/projet6/services/CommentaireService.class
-com/projet6/controller/AccueilController.class
 com/projet6/repositories/DepartementRepository.class
 com/projet6/controller/PartagerSiteController.class
 com/projet6/exceptions/UtilisateurException.class
