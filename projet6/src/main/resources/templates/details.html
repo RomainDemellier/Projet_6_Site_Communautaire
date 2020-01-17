@@ -149,12 +149,13 @@
     }
 
     function updateComment(id) {
-
+		alert("comment id : " + id);
         $.ajax({
-            url: "/api/commentaires/" + id,
+            url: "/projet6-1.0/api/commentaires/" + id,
             success: function (data){
                 console.log(data.id);
                 console.log(data.contenu);
+                alert("Succès");
                 $("#updateCommentId").val(data.id);
                 $("#updateCommentContenu").val(data.contenu);
             }

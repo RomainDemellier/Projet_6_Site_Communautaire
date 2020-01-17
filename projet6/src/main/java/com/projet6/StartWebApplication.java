@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 @SpringBootApplication
 //@EnableJpaAuditing
 public class StartWebApplication extends SpringBootServletInitializer {
-
+	//public class StartWebApplication {
 	 @Override
 	 protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
 	  return application.sources(StartWebApplication.class);
